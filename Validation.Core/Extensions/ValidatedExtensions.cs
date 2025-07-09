@@ -34,7 +34,7 @@ public static class ValidatedExtensions
 
              return (firstResult.IsValid && secondResult.IsValid)
                          ? Validated<T>.Valid(input)
-                             : Validated<T>.Invalid(firstResult.Failures.Concat(secondResult.Failures).ToList());
+                             : Validated<T>.Invalid([.. firstResult.Failures, .. secondResult.Failures]);
          };
 
 }

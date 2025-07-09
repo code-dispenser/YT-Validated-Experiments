@@ -12,7 +12,7 @@ public class CacheRepository(CacheProvider cacheProvider) : ICacheRepository
     /*
         * You would wrap all this stuff in a Result type. 
     */ 
-    public async Task<ImmutableList<ValidationRuleConfig>> GetTenantConfigurations(string itemKey, string tenantID)
+    public async Task<ImmutableList<ValidationRuleConfig>> GetAllTenantConfigurations(string itemKey)
     
         => await _cacheProvider.GetOrCreate(BuildConfigurations, itemKey, 5);// << you would probably use some global constants for keys and cache times, etc.
 

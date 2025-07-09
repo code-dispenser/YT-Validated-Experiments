@@ -24,15 +24,15 @@ public sealed record class Validated<T> where T : notnull
 
     public static Validated<T> Valid(T value)
 
-        => new Validated<T>(value);
+        => new(value);
 
     public static Validated<T> Invalid(IEnumerable<ValidationEntry> failures)
 
-        => new Validated<T>(failures);
+        => new(failures);
 
     public static Validated<T> Invalid(ValidationEntry failure)
 
-        => new Validated<T>([failure]);
+        => new([failure]);
 
     public T GetValueOr(T fallback)
 
