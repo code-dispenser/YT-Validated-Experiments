@@ -12,12 +12,12 @@ public static class ValidatorFactories
                               ? Validated<T>.Valid(valueToValidate!)
                                  : Validated<T>.Invalid(new ValidationEntry(propertyName, displayName, failureMessage));
 
-    public static Func<T, Validated<T>> CreatePredicateValidator<T>(Func<T, bool> predicate, string fieldName, string displayName, string failureMessage) where T : notnull
+    public static Func<T, Validated<T>> CreatePredicateValidator<T>(Func<T, bool> predicate, string propertyName, string displayName, string failureMessage) where T : notnull
 
-        => valueToValidate => predicate(valueToValidate) ? Validated<T>.Valid(valueToValidate) : Validated<T>.Invalid(new ValidationEntry(fieldName, displayName, failureMessage));
+        => valueToValidate => predicate(valueToValidate) ? Validated<T>.Valid(valueToValidate) : Validated<T>.Invalid(new ValidationEntry(propertyName, displayName, failureMessage));
 
 
-    private static Func<string, Validated<string>> CreateStringLengthValidator(int minLength, int maxLength, string fieldName, string displayName, string failureMessage)
+    private static Func<string, Validated<string>> CreateStringLengthValidator(int minLength, int maxLength, string propertyName, string displayName, string failureMessage)
 
         => valueToValidate =>
         {
@@ -25,7 +25,7 @@ public static class ValidatorFactories
 
             return (value >= minLength && value <= maxLength)
                 ? Validated<string>.Valid(valueToValidate!)
-                    : Validated<string>.Invalid(new ValidationEntry(fieldName, displayName, failureMessage));
+                    : Validated<string>.Invalid(new ValidationEntry(propertyName, displayName, failureMessage));
         };
 
     public static Func<string, Validated<string>> CreateTitleValidator<T>() 

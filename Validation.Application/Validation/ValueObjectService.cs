@@ -22,7 +22,7 @@ public class ValueObjectService (ICacheRepository cacheRepository, ValidationFac
         var givenNameValidator  = ValueObjectValidationBuilder.BuildGivenNameValidator(getConfigs,  _validationFactoryProvider);
         var titleValidator      = ValueObjectValidationBuilder.BuildTitleValidator(getConfigs,      _validationFactoryProvider);
 
-        return  base.CreateFullName(titleValidator(title), givenNameValidator(givenName), familyNameValidator(familyName));
+        return  base.CreateFullName(titleValidator(title), givenNameValidator(givenName), familyNameValidator(familyName)); //<< this can access the InternalCreate method
     }
 
     private static List<ValidationRuleConfig> GetTenantConfigs(string typeName, string propertyName, string tenantID, ImmutableList<ValidationRuleConfig> configurations)
@@ -32,7 +32,9 @@ public class ValueObjectService (ICacheRepository cacheRepository, ValidationFac
                     .Select(group =>
                     {
                         var tenantSpecific = group.FirstOrDefault(config => config.TenantID == tenantID);
-
+                        /*
+                            * try to find a tenant-specific configuration or fall back to a default one - All
+                        */ 
                         return tenantSpecific ?? group.FirstOrDefault(config => string.IsNullOrWhiteSpace(config.TenantID) || config.TenantID == "ALL");
                     })
                     .Where(config => config is not null).ToList()!;

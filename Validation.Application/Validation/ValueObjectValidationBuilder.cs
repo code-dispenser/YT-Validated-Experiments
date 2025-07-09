@@ -30,7 +30,7 @@ public static class ValueObjectValidationBuilder
 
     public static Func<T, Validated<T>> BuildValidator<T>(List<ValidationRuleConfig> buildFor, ValidationFactoryProvider validationFactories) where T : notnull
 
-        => buildFor.Select(validator => validationFactories.GetValidatorFactory(validator.RuleType).CreatePartial<T>(validator))
+        => buildFor.Select(ruleConfig => validationFactories.GetValidatorFactory(ruleConfig.RuleType).CreatePartial<T>(ruleConfig))
                         .ToList()
                             .Aggregate((current, next) => current.AndThen(next));
 }
