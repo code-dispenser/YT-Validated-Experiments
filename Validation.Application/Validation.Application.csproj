@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Validation.Contracts\Validation.Contracts.csproj" />
     <ProjectReference Include="..\Validation.Core\Validation.Core.csproj" />
     <ProjectReference Include="..\Validation.Domain\Validation.Domain.csproj" />
   </ItemGroup>

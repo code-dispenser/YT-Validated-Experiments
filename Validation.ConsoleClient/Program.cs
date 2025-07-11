@@ -30,6 +30,8 @@ internal class Program
         Console.WriteLine("Creating a FullName value object with good data using regular methods to create the validators - no tenant or dynamic creation");
         Console.WriteLine(await httpClient.GetStringAsync($"{_validationRoute}/TestCreateFullName?title={title}&givenName={givenName}&familyName={familyName}"));
 
+        Console.ReadLine();
+
     }
 
     private static IHttpClientFactory ConfigureServiceProvider(Uri hostUri)
