@@ -16,9 +16,9 @@ public record FullName
 
     public static Validated<FullName> Create(string title, string givenName, string familyName)
     {
-        var validatedTitle      = ValidatorFactories.CreateTitleValidator<string>()(title);         // create and then execute the validator
-        var validatedGivenName  = ValidatorFactories.CreateGivenNameValidator<string>()(givenName);
-        var validatedFamilyName = ValidatorFactories.CreateFamilyNameValidator<string>()(familyName);
+        var validatedTitle      = ValidatorFactories.CreateTitleValidator()(title);         // create and then execute the validator
+        var validatedGivenName  = ValidatorFactories.CreateGivenNameValidator()(givenName);
+        var validatedFamilyName = ValidatorFactories.CreateFamilyNameValidator()(familyName);
 
         Func<string, Func<string, Func<string, FullName>>> curriedFunc = title => given => family => new FullName(title, given, family);
 
