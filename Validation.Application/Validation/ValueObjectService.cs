@@ -1,4 +1,5 @@
 ﻿using Validation.Application.Common.Seeds;
+using Validation.Core.Common.Constants;
 using Validation.Core.Factories;
 using Validation.Core.Types;
 using Validation.Domain.Seeds;
@@ -11,7 +12,7 @@ public class ValueObjectService (ICacheRepository cacheRepository, ValidationFac
     private readonly ValidationFactoryProvider _validationFactoryProvider = validationFactoryProvider;
     private readonly ICacheRepository          _cacheRepository           = cacheRepository;
 
-    public async Task<Validated<FullName>> CreateFullName(string title, string givenName, string familyName, string tenantID = "ALL")
+    public async Task<Validated<FullName>> CreateFullName(string title, string givenName, string familyName, string tenantID = GlobalValues.DefaultTenantID)
     {
         var configurations = await _cacheRepository.GetAllTenantConfigurations("ValidationConfigurations");
         
