@@ -1,8 +1,10 @@
 ﻿using System.Collections.Immutable;
 using Validation.Core.Common.Constants;
+using Validation.Core.Extensions;
+using Validation.Core.Factories;
 using Validation.Core.Types;
 
-public static class TenantConfigHelper
+public static class TenantValidationHelper
 {
     public static List<ValidationRuleConfig> GetTenantConfigs(string typeName, string propertyName, string tenantID, ImmutableList<ValidationRuleConfig> configurations)
 
@@ -17,4 +19,11 @@ public static class TenantConfigHelper
                         return tenantSpecific ?? group.FirstOrDefault(config => string.IsNullOrWhiteSpace(config.TenantID) || config.TenantID == GlobalValues.DefaultTenantID);
                     })
                     .Where(config => config is not null).ToList()!;
+
+
+    public static Func<T, Validated<T>> BuildValidator<T>(List<ValidationRuleConfig> buildFor, ValidationFactoryProvider validationFactories) where T : notnull
+
+        => buildFor.Select(ruleConfig => validationFactories.GetValidatorFactory(ruleConfig.RuleType).CreatePartial<T>(ruleConfig))
+                        .ToList()
+                            .Aggregate((current, next) => current.AndThen(next));
 }

@@ -16,7 +16,7 @@ public class ValueObjectService (ICacheRepository cacheRepository, ValidationFac
     {
         var configurations = await _cacheRepository.GetAllTenantConfigurations("ValidationConfigurations");
         
-        Func<string, string, List<ValidationRuleConfig>> getConfigs = (typeName, propertyName) => TenantConfigHelper.GetTenantConfigs(typeName, propertyName, tenantID, configurations);
+        Func<string, string, List<ValidationRuleConfig>> getConfigs = (typeName, propertyName) => TenantValidationHelper.GetTenantConfigs(typeName, propertyName, tenantID, configurations);
 
         var familyNameValidator = ValueObjectValidationBuilder.BuildFamilyNameValidator(getConfigs, _validationFactoryProvider);
         var givenNameValidator  = ValueObjectValidationBuilder.BuildGivenNameValidator(getConfigs,  _validationFactoryProvider);
@@ -25,6 +25,6 @@ public class ValueObjectService (ICacheRepository cacheRepository, ValidationFac
         return  base.CreateFullName(titleValidator(title), givenNameValidator(givenName), familyNameValidator(familyName)); //<< this can access the InternalCreate method
     }
     /*
-        * Moved the GetTenantConfigs method to the TenantConfigHelper class as the method could be used by any project
+        * Moved the GetTenantConfigs method to the TenantValidationHelper class as the method could be used by any project
     */
 }

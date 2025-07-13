@@ -11,26 +11,24 @@ public static class ValueObjectValidationBuilder
     {
         var configs = getConfigs(typeof(FullName).FullName!, nameof(FullName.FamilyName));
 
-        return BuildValidator<string>(configs, validationFactories);
+        return TenantValidationHelper.BuildValidator<string>(configs, validationFactories);
     }
 
     public static Func<string, Validated<string>> BuildGivenNameValidator(Func<string, string, List<ValidationRuleConfig>> getConfigs, ValidationFactoryProvider validationFactories)
     {
         var configs = getConfigs(typeof(FullName).FullName!, nameof(FullName.GivenName));
 
-        return BuildValidator<string>(configs, validationFactories);
+        return TenantValidationHelper.BuildValidator<string>(configs, validationFactories);
     }
 
     public static Func<string, Validated<string>> BuildTitleValidator(Func<string, string, List<ValidationRuleConfig>> getConfigs, ValidationFactoryProvider validationFactories)
     {
         var configs = getConfigs(typeof(FullName).FullName!, nameof(FullName.Title));
 
-        return BuildValidator<string>(configs, validationFactories);
+        return TenantValidationHelper.BuildValidator<string>(configs, validationFactories);
     }
 
-    public static Func<T, Validated<T>> BuildValidator<T>(List<ValidationRuleConfig> buildFor, ValidationFactoryProvider validationFactories) where T : notnull
-
-        => buildFor.Select(ruleConfig => validationFactories.GetValidatorFactory(ruleConfig.RuleType).CreatePartial<T>(ruleConfig))
-                        .ToList()
-                            .Aggregate((current, next) => current.AndThen(next));
+    /*
+         * Moved the BuildValidator methods to this static class TenantValidationHelper as it was not tied to any layer. 
+    */
 }
