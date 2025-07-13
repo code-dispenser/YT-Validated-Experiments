@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using Validation.Core.Common.Constants;
 using Validation.Core.Types;
 
 public static class TenantConfigHelper
@@ -13,7 +14,7 @@ public static class TenantConfigHelper
                         /*
                             * try to find a tenant-specific configuration or fall back to a default one - All
                         */
-                        return tenantSpecific ?? group.FirstOrDefault(config => string.IsNullOrWhiteSpace(config.TenantID) || config.TenantID == "ALL");
+                        return tenantSpecific ?? group.FirstOrDefault(config => string.IsNullOrWhiteSpace(config.TenantID) || config.TenantID == GlobalValues.DefaultTenantID);
                     })
                     .Where(config => config is not null).ToList()!;
 }
