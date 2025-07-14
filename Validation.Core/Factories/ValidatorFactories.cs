@@ -41,6 +41,11 @@ public static class ValidatorFactories
         => CreateRegexValidator<string>(@"^(?=.{2,50}$)[A-Z]+['\- ]?[A-Za-z]*['\- ]?[A-Za-z]+$", "FamilyName", "Surname", "Must start with a capital letter")
             .AndThen(CreateStringLengthValidator(2, 50, "FamilyName", "Surname", "Must be between 2 and 50 characters long"));
 
-    
+    public static Func<T, Validated<T>> CreatePropertyValidator<T>(string tenantID, string typeFullName, string propertyName, Func<string, string, string, List<ValidationRuleConfig>> getConfigs, ValidationFactoryProvider validationFactoryProvider) where T : notnull
+    {
+        var ruleConfigs = getConfigs(tenantID, typeFullName, propertyName);
+
+        return TenantValidationHelper.BuildValidator<T>(ruleConfigs, validationFactoryProvider);
+    }
 }
 
