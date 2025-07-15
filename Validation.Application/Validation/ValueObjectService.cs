@@ -22,11 +22,10 @@ public class ValueObjectService (ICacheRepository cacheRepository, ValidationFac
         //var givenNameValidator  = ValueObjectValidationBuilder.BuildGivenNameValidator(getConfigs,  _validationFactoryProvider);
         //var titleValidator      = ValueObjectValidationBuilder.BuildTitleValidator(getConfigs,      _validationFactoryProvider);
 
-        Func<string, string, string, List<ValidationRuleConfig>> getConfigs = (tenantID, typeFullName, propertyName) => TenantValidationHelper.GetTenantConfigs(typeFullName, propertyName, tenantID, configurations);
         
-        var familyNameValidator = ValidatorFactories.CreatePropertyValidator<string>(tenantID, typeof(FullName).FullName!, nameof(FullName.FamilyName), getConfigs, _validationFactoryProvider);
-        var givenNameValidator  = ValidatorFactories.CreatePropertyValidator<string>(tenantID, typeof(FullName).FullName!, nameof(FullName.GivenName), getConfigs, _validationFactoryProvider);
-        var titleValidator      = ValidatorFactories.CreatePropertyValidator<string>(tenantID, typeof(FullName).FullName!, nameof(FullName.Title), getConfigs, _validationFactoryProvider);
+        var familyNameValidator = ValidatorFactories.CreatePropertyValidator<string>(tenantID, typeof(FullName).FullName!, nameof(FullName.FamilyName), configurations, _validationFactoryProvider);
+        var givenNameValidator  = ValidatorFactories.CreatePropertyValidator<string>(tenantID, typeof(FullName).FullName!, nameof(FullName.GivenName), configurations, _validationFactoryProvider);
+        var titleValidator      = ValidatorFactories.CreatePropertyValidator<string>(tenantID, typeof(FullName).FullName!, nameof(FullName.Title), configurations, _validationFactoryProvider);
 
         return  base.CreateFullName(titleValidator(title), givenNameValidator(givenName), familyNameValidator(familyName)); //<< this can access the InternalCreate method
     }
