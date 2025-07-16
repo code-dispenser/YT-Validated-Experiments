@@ -12,7 +12,7 @@ public class ValueObjectService (ICacheRepository cacheRepository, ValidationFac
     private readonly ValidationFactoryProvider _validationFactoryProvider = validationFactoryProvider;
     private readonly ICacheRepository          _cacheRepository           = cacheRepository;
 
-    public async Task<Validated<FullName>> CreateFullName(string title, string givenName, string familyName, string tenantID = GlobalValues.DefaultTenantID)
+    public async Task<Validated<FullName>> CreateFullName(string title, string givenName, string familyName, string tenantID = GlobalValues.Default_TenantID)
     {
         var configurations = await _cacheRepository.GetAllTenantConfigurations("ValidationConfigurations");
         

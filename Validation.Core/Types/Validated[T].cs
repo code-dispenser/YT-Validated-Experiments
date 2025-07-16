@@ -1,6 +1,6 @@
 ﻿namespace Validation.Core.Types;
 
-public sealed record class Validated<T> where T : notnull
+public sealed record class Validated<T> : IValidated where T : notnull
 {
     private readonly IReadOnlyList<ValidationEntry> _failures;
     private readonly T? _value;

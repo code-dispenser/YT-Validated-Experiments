@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Server Side", "03-Server
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation.Application", "Validation.Application\Validation.Application.csproj", "{A0C9E53E-0F46-4DD1-BB40-8BD9AA6A6423}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation.Contracts", "Validation.Contracts\Validation.Contracts.csproj", "{01E0D399-7974-C838-9476-55AC23E59D17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{A0C9E53E-0F46-4DD1-BB40-8BD9AA6A6423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0C9E53E-0F46-4DD1-BB40-8BD9AA6A6423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0C9E53E-0F46-4DD1-BB40-8BD9AA6A6423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01E0D399-7974-C838-9476-55AC23E59D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E0D399-7974-C838-9476-55AC23E59D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E0D399-7974-C838-9476-55AC23E59D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E0D399-7974-C838-9476-55AC23E59D17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{54844881-6336-49E1-900A-70147A97E8DF} = {1740AE8F-08E3-499C-89B5-FDCF92A8C5CB}
 		{0A948EAD-7B98-468D-9544-9F87A92D173F} = {1740AE8F-08E3-499C-89B5-FDCF92A8C5CB}
 		{A0C9E53E-0F46-4DD1-BB40-8BD9AA6A6423} = {1740AE8F-08E3-499C-89B5-FDCF92A8C5CB}
+		{01E0D399-7974-C838-9476-55AC23E59D17} = {110A2A9D-AB96-47A0-9766-76C1596DFDFA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC553522-D298-4F79-8E7C-E81F3DFD11E2}
