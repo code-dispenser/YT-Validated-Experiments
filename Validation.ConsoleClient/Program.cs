@@ -12,15 +12,15 @@ namespace Validation.ConsoleClient;
 internal class Program
 {
     private static readonly Uri _hostingServer = new("https://localhost:44395"); // <<<< Choose your poison, this is for IIS Express see launch settings on web server .
-
+    
     //private static readonly Uri _hostingServer = new ("https://localhost:7259"); //  <<<< kestrel
-
+    
     private static readonly string _validationRoute = "api/validation";
 
     static async Task Main()
     {
         var httpClientFactory = ConfigureServiceProvider(_hostingServer);
-        var httpClient = httpClientFactory.CreateClient();
+        var httpClient        = httpClientFactory.CreateClient();
 
         Console.OutputEncoding = Encoding.UTF8;
 
@@ -50,21 +50,13 @@ internal class Program
     }
     private static async Task PartTwoClientCode(HttpClient httpClient, string validationRoute)
     {
-
+        
 
         Console.WriteLine("Validating a good ContactDto with a populated optional (Address?) address, client side using object/methods contained in the shared projects Validation.Contracts and Validation.Core");
-        Console.WriteLine("This can also be done on the server side as all the code is in the shared projects\r\n");
+        Console.WriteLine("This can also be done on the server side as all the code is in the shared projects\r\n"); 
 
-        ContactDto goodContact = new()
-        {
-            Title = "Mr",
-            GivenName  = "John",
-            FamilyName = "Doe",
-            DOB= new DateOnly(1990, 1, 1),
-            Email = "john.doe@gmail.com",
-            Mobile = "07123456789",
-            Address = new AddressDto() { AddressLine = "House on the street", TownCity = "London", County="Greater London", Postcode = "SW1A 0AA" }
-        };
+        ContactDto goodContact = new(){ Title = "Mr", GivenName  = "John", FamilyName = "Doe", DOB= new DateOnly(1990, 1, 1), Email = "john.doe@gmail.com", Mobile = "07123456789",                                        
+                                    Address = new AddressDto() { AddressLine = "House on the street", TownCity = "London", County="Greater London", Postcode = "SW1A 0AA" }};
 
         Console.WriteLine(new ContactDtoValidator().Validate(goodContact).Match(failure => String.Join(Environment.NewLine, failure), success => success.ToString()) + "\r\n");
 
@@ -72,16 +64,8 @@ internal class Program
 
         Console.WriteLine("Validating a bad ContactDto with a populated optional (Address?) address client side");
 
-        ContactDto badContact = new()
-        {
-            Title = "M",
-            GivenName  = "John",
-            FamilyName = "Doe",
-            DOB= new DateOnly(1901, 1, 1),
-            Email = "john.doe@hotmail.com",
-            Mobile = "07123456789",
-            Address = new AddressDto() { AddressLine = "House on the street", TownCity = "", County="Greater London", Postcode = "SW1A 0AA" }
-        };
+        ContactDto badContact = new(){ Title = "M", GivenName  = "John", FamilyName = "Doe", DOB= new DateOnly(1901, 1, 1), Email = "john.doe@hotmail.com", Mobile = "07123456789",                                        
+                        Address = new AddressDto() { AddressLine = "House on the street", TownCity = "", County="Greater London", Postcode = "SW1A 0AA" }};
 
         Console.WriteLine(new ContactDtoValidator().Validate(badContact).Match(failure => String.Join(Environment.NewLine, failure), success => success.ToString()) + "\r\n");
 
@@ -93,27 +77,19 @@ internal class Program
 
         Console.WriteLine("Validating in a semi-dynamic way (no reflection) using the multi-tenant configs and a bad ContactDto WITHOUT a populated optional (Address?) address client side\r\n");
 
-        badContact = new() { Title = "M", GivenName  = "John", FamilyName = "Doe", DOB= new DateOnly(1901, 1, 1), Email = "john.doe@hotmail.com", Mobile = "07123456789" };
+        badContact = new(){ Title = "M", GivenName  = "John", FamilyName = "Doe", DOB= new DateOnly(1901, 1, 1), Email = "john.doe@hotmail.com", Mobile = "07123456789"};
 
         var validatedBadContact = new ContactTenantDtoValidator().Validate("TenantOne", badContact, [.. allConfigurations!], new ValidationFactoryProvider());
-
+        
         Console.WriteLine(validatedBadContact.Match(failure => String.Join(Environment.NewLine, failure), success => success.ToString()) + "\r\n");
 
         Console.WriteLine("Validating using a reflection based approach with a basic generic validator (good for any dto/command/query/message etc) " +
                           "using the multi-tenant configs and a bad ContactDto with a populated optional (Address?) address client side\r\n");
 
-        badContact = new()
-        {
-            Title = "M",
-            GivenName  = "John",
-            FamilyName = "Doe",
-            DOB= new DateOnly(1901, 1, 1),
-            Email = "john.doe@hotmail.com",
-            Mobile = "07123456789",
-            Address = new AddressDto() { AddressLine = "House on the street", TownCity = "", County="Greater London", Postcode = "SW1A 0AA" }
-        };
+        badContact = new(){ Title = "M", GivenName  = "John", FamilyName = "Doe", DOB= new DateOnly(1901, 1, 1), Email = "john.doe@hotmail.com", Mobile = "07123456789",                                        
+                        Address = new AddressDto() { AddressLine = "House on the street", TownCity = "", County="Greater London", Postcode = "SW1A 0AA" }};
 
-        var genericValidatedBadContact = GenericValidator.Validate(badContact, allConfigurations!, new(), "TenantOne");
+        var genericValidatedBadContact  = GenericValidator.Validate(badContact, allConfigurations!, new(),"TenantOne");
 
         Console.WriteLine(genericValidatedBadContact.Match(failure => String.Join(Environment.NewLine, failure), success => success.ToString()) + "\r\n");
     }
@@ -126,8 +102,8 @@ internal class Program
         services.AddHttpClient("", c => c.BaseAddress = hostUri);
         var provider = services.BuildServiceProvider();
 
-        return provider.GetRequiredService<IHttpClientFactory>();
+       return provider.GetRequiredService<IHttpClientFactory>();
     }
-
-
+                    
+                         
 }
