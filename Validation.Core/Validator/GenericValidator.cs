@@ -42,8 +42,7 @@ public static class GenericValidator
             {
                 var recursiveMethod = typeof(GenericValidator).GetMethod(nameof(ValidateProperties), BindingFlags.NonPublic | BindingFlags.Static)!.MakeGenericMethod(propertyType);
 
-                var validations = (List<ValidationEntry>)recursiveMethod.Invoke(null, [value,configurations, validationFactoryProvider, tenantID])!
-                    ;
+                var validations = (List<ValidationEntry>)recursiveMethod.Invoke(null, [value,configurations, validationFactoryProvider, tenantID])!;
                 invalidEntries.AddRange(validations);
             }
 

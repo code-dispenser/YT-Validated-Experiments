@@ -18,7 +18,7 @@ public class AddressDTOValidator : IObjectValidator<AddressDto>
                                                 "Town / City","Must start with a capital letter and be between 3 to 100 characters in length.")(dataObject.TownCity),
 
             ValidatorFactories.CreateRegexValidator<string>(@"^(?=.{3,100}$)[A-Z](?!.* {2})(?!.*'{2})(?!.*-{2})[\-A-Za-z ']+[a-z]+$", nameof(dataObject.TownCity),
-                                                "TCounty","Must start with a capital letter and be between 3 to 100 characters in length.")(dataObject.County)
+                                                "County","Must start with a capital letter and be between 3 to 100 characters in length.")(dataObject.County)
 
         ];
 
