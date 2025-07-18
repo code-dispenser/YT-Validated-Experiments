@@ -32,7 +32,7 @@ public class CacheRepository(CacheProvider cacheProvider) : ICacheRepository
 
                 new("Validation.Contracts.DTOs.ContactDto", "Title", "Title", RuleType.Regex, MinMaxValueType.String, @"^(Mr|Mrs|Ms|Dr|Prof)$", "Must be one of Mr, Mrs, Ms, Dr, Prof", 2, 4),
                 new("Validation.Contracts.DTOs.ContactDto", "GivenName", "First name", RuleType.Regex, MinMaxValueType.String, @"^(?=.{2,50}$)[A-Z]+['\- ]?[A-Za-z]*['\- ]?[A-Za-z]+$", "Must start with a capital letter and be between 2 and 50 characters in length", 2, 50),
-                new("Validation.Contracts.DTOs.ContactDto", "FamilyName", "Surname", RuleType.Regex, MinMaxValueType.String, @"^[A-Z]+['\- ]?[A-Za-z]*['\- ]?[A-Za-z]*$", "Must start with a capital letter", 2, 50, "", "", "TenantOne"),
+                new("Validation.Contracts.DTOs.ContactDto", "FamilyName", "Surname", RuleType.Regex, MinMaxValueType.String, @"^[A-Z]+['\- ]?[A-Za-z]*['\- ]?[A-Za-z]*$", "Must start with a capital letter (TenantOne)", 2, 50, "", "", "TenantOne"),
                 new("Validation.Contracts.DTOs.ContactDto", "FamilyName", "Surname", RuleType.Regex, MinMaxValueType.String, @"^[A-Z]+['\- ]?[A-Za-z]*['\- ]?[A-Za-z]*$", "Must start with a capital letter", 2, 50),
                 new("Validation.Contracts.DTOs.ContactDto", "FamilyName", "Surname", RuleType.Length, MinMaxValueType.String, "", "Must be between 2 and 50 characters long", 2, 50),
                 new("Validation.Contracts.DTOs.ContactDto", "Email", "Email", RuleType.Regex, MinMaxValueType.String, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", "Must be a valid email format", 4, 75),

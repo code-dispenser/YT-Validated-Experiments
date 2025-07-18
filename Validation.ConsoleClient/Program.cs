@@ -77,7 +77,7 @@ internal class Program
 
         Console.WriteLine("Validating in a semi-dynamic way (no reflection) using the multi-tenant configs and a bad ContactDto WITHOUT a populated optional (Address?) address client side\r\n");
 
-        badContact = new(){ Title = "M", GivenName  = "John", FamilyName = "Doe", DOB= new DateOnly(1901, 1, 1), Email = "john.doe@hotmail.com", Mobile = "07123456789"};
+        badContact = new(){ Title = "M", GivenName  = "John", FamilyName = "d", DOB= new DateOnly(1901, 1, 1), Email = "john.doe@hotmail.com", Mobile = "07123456789"};
 
         var validatedBadContact = new ContactTenantDtoValidator().Validate("TenantOne", badContact, [.. allConfigurations!], new ValidationFactoryProvider());
         
@@ -86,7 +86,7 @@ internal class Program
         Console.WriteLine("Validating using a reflection based approach with a basic generic validator (good for any dto/command/query/message etc) " +
                           "using the multi-tenant configs and a bad ContactDto with a populated optional (Address?) address client side\r\n");
 
-        badContact = new(){ Title = "M", GivenName  = "John", FamilyName = "Doe", DOB= new DateOnly(1901, 1, 1), Email = "john.doe@hotmail.com", Mobile = "07123456789",                                        
+        badContact = new(){ Title = "M", GivenName  = "John", FamilyName = "d", DOB= new DateOnly(1901, 1, 1), Email = "john.doe@hotmail.com", Mobile = "07123456789",                                        
                         Address = new AddressDto() { AddressLine = "House on the street", TownCity = "", County="Greater London", Postcode = "SW1A 0AA" }};
 
         var genericValidatedBadContact  = GenericValidator.Validate(badContact, allConfigurations!, new(),"TenantOne");
